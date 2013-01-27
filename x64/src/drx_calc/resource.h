@@ -1,7 +1,7 @@
 /*
 $Id$
 
-DRx Calculator v1.1
+DRx Calculator v1.2
 
 Copyright (C) 2011 +NCR/CRC! [ReVeRsEr] http://crackinglandia.blogspot.com
 

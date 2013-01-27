@@ -1,7 +1,7 @@
 /*
 $Id$
 
-DRx Calculator v1.1
+DRx Calculator v1.2
 
 Copyright (C) 2011 +NCR/CRC! [ReVeRsEr] http://crackinglandia.blogspot.com
 
@@ -46,8 +46,8 @@ Date: September 2011
 #define DR1_EXECUTION 0
 
 #define DR1_LEN1 0
-#define DR1_LEN2 0x1000000
-#define DR1_LEN4 0x3000000
+#define DR1_LEN2 0x400000
+#define DR1_LEN4 0x0C00000
 #define DR1_LENU 0x2000000
 
 #define DR2_LOCAL_EXACT_BPM_ENABLED 0x10
@@ -59,8 +59,8 @@ Date: September 2011
 #define DR2_EXECUTION 0
 
 #define DR2_LEN1 0
-#define DR2_LEN2 0x40000000
-#define DR2_LEN4 0x0C0000000
+#define DR2_LEN2 0x04000000
+#define DR2_LEN4 0x0C000000
 #define DR2_LENU 0x80000000
 
 #define DR3_LOCAL_EXACT_BPM_ENABLED 0x40
@@ -72,9 +72,9 @@ Date: September 2011
 #define DR3_EXECUTION 0
 
 #define DR3_LEN1 0
-#define DR3_LEN2 0x1000000000
-#define DR3_LEN4 0x3000000000
-#define DR3_LENU 0x2000000000
+#define DR3_LEN2 0x40000000
+#define DR3_LEN4 0xC0000000
+//#define DR3_LENU 0x2000000000 bad
 
 // Bits generales
 #define LOCAL_EXACT_BPM_ENABLED 0x100
@@ -84,3 +84,4 @@ Date: September 2011
 #define GLOBAL_EXACT_BPM_ENABLED 0x200
 #define GENERAL_DETECT_ENABLED 0x2000
 #define RESERVED_BIT10 0x400
+
