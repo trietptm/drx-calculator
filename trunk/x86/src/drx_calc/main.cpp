@@ -1,7 +1,7 @@
 /*
 $Id$
 
-DRx Calculator v1.1
+DRx Calculator v1.2
 
 Copyright (C) 2011 +NCR/CRC! [ReVeRsEr] http://crackinglandia.blogspot.com
 
@@ -84,7 +84,7 @@ void EnableComboBox(HWND hCombo)
 // function definitions
 void ShowHelp(HWND hDlgMain)
 {
-	MessageBox(hDlgMain, L"DRx Calculator v1.1\n\nCoded by +NCR/CRC! [ReVeRsEr]\n\nMail: crackinglandia(at)gmail(dot)com\nTwitter: @crackinglandia\n\nGeneral Pico, La Pampa\nArgentina\n\nSeptiembre 2011", L"DRx Calculator", MB_ICONINFORMATION);
+	MessageBox(hDlgMain, L"DRx Calculator v1.2\n\nCoded by +NCR/CRC! [ReVeRsEr]\n\nMail: crackinglandia(at)gmail(dot)com\nTwitter: @crackinglandia\n\nGeneral Pico, La Pampa\nArgentina\n\nSeptiembre 2011", L"DRx Calculator", MB_ICONINFORMATION);
 }
 
 void ShowErrorObtainingHandles(HWND hDlgMain)
@@ -369,7 +369,7 @@ BOOL CALLBACK AppDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			if(IsDlgButtonChecked(hDlg, CHECK_DR0) == BST_CHECKED)
 			{
 				// we know the user selected DR0 so, we add the corresponding values
-				dr0Result += LOCAL_EXACT_BPM_ENABLED + DR0_LOCAL_EXACT_BPM_ENABLED;
+				dr0Result += LOCAL_EXACT_BPM_ENABLED + DR0_LOCAL_EXACT_BPM_ENABLED + RESERVED_BIT10;
 
 				// get the DR0_TYPE and DR0_SIZE values
 				iCbSelectionType = SendMessage(hTypeDr0, CB_GETCURSEL, 0, 0);
@@ -380,7 +380,7 @@ BOOL CALLBACK AppDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 				if(iCbSelectionType == ONEXEC)
 				{
-					dr0Result += DR0_EXECUTION + DR0_LEN1;
+					dr0Result += DR0_EXECUTION + DR0_LEN1 - LOCAL_EXACT_BPM_ENABLED;
 				}
 				else
 				{
@@ -421,14 +421,14 @@ BOOL CALLBACK AppDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			if(IsDlgButtonChecked(hDlg, CHECK_DR1) == BST_CHECKED)
 			{
-				dr1Result += LOCAL_EXACT_BPM_ENABLED + DR1_LOCAL_EXACT_BPM_ENABLED;
+				dr1Result += LOCAL_EXACT_BPM_ENABLED + DR1_LOCAL_EXACT_BPM_ENABLED + RESERVED_BIT10;
 
 				iCbSelectionType = SendMessage(hTypeDr1, CB_GETCURSEL, 0, 0);
 				iCbSelectionSize = SendMessage(hSizeDr1, CB_GETCURSEL, 0, 0);
 
 				if(iCbSelectionType == ONEXEC)
 				{
-					dr1Result += DR1_EXECUTION + DR1_LEN1;
+					dr1Result += DR1_EXECUTION + DR1_LEN1 - LOCAL_EXACT_BPM_ENABLED;
 				}
 				else
 				{
@@ -469,14 +469,14 @@ BOOL CALLBACK AppDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			if(IsDlgButtonChecked(hDlg, CHECK_DR2) == BST_CHECKED)
 			{
-				dr2Result += LOCAL_EXACT_BPM_ENABLED + DR2_LOCAL_EXACT_BPM_ENABLED;
+				dr2Result += LOCAL_EXACT_BPM_ENABLED + DR2_LOCAL_EXACT_BPM_ENABLED + RESERVED_BIT10;
 
 				iCbSelectionType = SendMessage(hTypeDr2, CB_GETCURSEL, 0, 0);
 				iCbSelectionSize = SendMessage(hSizeDr2, CB_GETCURSEL, 0, 0);
 
 				if(iCbSelectionType == ONEXEC)
 				{
-					dr2Result += DR2_EXECUTION + DR2_LEN1;
+					dr2Result += DR2_EXECUTION + DR2_LEN1 - LOCAL_EXACT_BPM_ENABLED;
 				}
 				else
 				{
@@ -517,14 +517,14 @@ BOOL CALLBACK AppDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			if(IsDlgButtonChecked(hDlg, CHECK_DR3) == BST_CHECKED)
 			{
-				dr3Result += LOCAL_EXACT_BPM_ENABLED + DR3_LOCAL_EXACT_BPM_ENABLED;
+				dr3Result += LOCAL_EXACT_BPM_ENABLED + DR3_LOCAL_EXACT_BPM_ENABLED + RESERVED_BIT10;
 
 				iCbSelectionType = SendMessage(hTypeDr3, CB_GETCURSEL, 0, 0);
 				iCbSelectionSize = SendMessage(hSizeDr3, CB_GETCURSEL, 0, 0);
 
 				if(iCbSelectionType == ONEXEC)
 				{
-					dr3Result += DR3_EXECUTION + DR3_LEN1;
+					dr3Result += DR3_EXECUTION + DR3_LEN1 - LOCAL_EXACT_BPM_ENABLED; 
 				}
 				else
 				{
@@ -563,7 +563,7 @@ BOOL CALLBACK AppDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			// ---------------------------------------------------------------
 			// final result
-			globalResult = dr0Result + dr1Result + dr2Result + dr3Result;
+			globalResult = dr0Result | dr1Result | dr2Result | dr3Result;
 
 			wsprintf(resultStr, L"0x%X", globalResult);
 			SetDlgItemText(hDlg, EDIT_CALCULATE, resultStr);
